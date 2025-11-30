@@ -59,16 +59,8 @@ namespace NanoEsp32Car
         private static PwmChannel _pwmRr1;
         private static PwmChannel _pwmRr2;
 
-        // ===== WiFi & UDP 配置（保持不动） =====
-        //private const string WIFI_SSID_PRIMARY = "iying";
-        //private const string WIFI_PASSWORD_PRIMARY = "18362450546";
 
-        // 备 WiFi
-        private const string WIFI_SSID_PRIMARY = "RedmiK70";
-        private const string WIFI_PASSWORD_PRIMARY = "12345678";
 
-        private const string WIFI_SSID_SECONDARY = "iying";
-        private const string WIFI_PASSWORD_SECONDARY = "18362450546";
 
         private const int UDP_PORT = 4210; // 手机往这个端口发
 
@@ -195,7 +187,7 @@ namespace NanoEsp32Car
                 }
 
                 // 2. 先尝试主 WiFi
-                if (TryConnectSsid(WIFI_SSID_PRIMARY, WIFI_PASSWORD_PRIMARY))
+                if (TryConnectSsid(Secrets.WIFI_SSID_PRIMARY, Secrets.WIFI_PASSWORD_PRIMARY))
                 {
                     return true;
                 }
@@ -203,7 +195,7 @@ namespace NanoEsp32Car
                 Debug.WriteLine("主 WiFi 连接失败，尝试备用 WiFi...");
 
                 // 3. 再尝试备用 WiFi
-                if (TryConnectSsid(WIFI_SSID_SECONDARY, WIFI_PASSWORD_SECONDARY))
+                if (TryConnectSsid(Secrets.WIFI_SSID_SECONDARY, Secrets.WIFI_PASSWORD_SECONDARY))
                 {
                     return true;
                 }
